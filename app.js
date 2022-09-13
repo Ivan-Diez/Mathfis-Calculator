@@ -1,31 +1,21 @@
+/*
 // FUNCION
 function conversor(numeroCentimetros) {
   return numeroCentimetros / 100;
 }
 
-//DECLARACIÓN DE FUNCIONES
-const calcularAreaTriangulo = (base, altura) => {
-  return (area = (base * altura) / 2);
-};
-const calcularPerimetroTriangulo = (base, altura, diagonal) => {
-  return (perimetro = base + altura + diagonal);
-};
-
 //DECLARACIÓN DE OBJETOS
 
 const misFiguras = [];
 
-const triangulo = {
-  base: "",
-  altura: "",
-  diagonal: "",
-  calcularArea: function () {
-    return (this.base * this.altura) / 1;
-  },
-  calcularPerimetro: function () {
-    return this.base + this.altura + this.diagonal;
-  },
-};
+//
+/
+/
+/
+/
+/
+/
+//
 
 const paralelogramos = {
   base: "",
@@ -49,21 +39,6 @@ const circulo = {
 };
 
 // COMIENZO DE LA APLICACIÓN
-alert(
-  "Bienvenidos a Mathfis Calculator, la aplicación web que te permitirá resolver tus problemas físicos y matemáticos brindandote las herramientas que automatizarán el cálculo de tus incógnitas !"
-);
-
-alert(
-  "Elegí que figura queres analizar, en caso de no querer continuar escribí finalizar"
-);
-
-alert(
-  "Por favor, respete las mayúsculas: triangulo, paralelogramos, circulo o finalizar"
-);
-
-let figura = prompt(
-  "Ingrese el nombre de la figura que desea analizar en la calculadora de Mathfis. En caso de no querer realizar una consulta ingrese la palabra finalizar"
-);
 
 const FIGURAS = {
   triangulo: "triangulo",
@@ -200,4 +175,59 @@ if (figura != "finalizar") {
   alert("Gracias por visitar nuestro sitio web!");
 } else {
   alert("Gracias por visitar nuestro sitio web!");
+}
+
+*/
+
+let article = document.getElementById("figuras");
+let subtitulo = document.getElementById("subtitulo");
+
+let opciones = document.createElement("div");
+opciones.innerHTML = `<button type="button" class="btn btn-secondary" onClick="ingresarDatos()">Triángulo</button>
+<button type="button" class="btn btn-secondary" onClick="mostrarCalculadora()">Cuadrado</button>
+<button type="button" class="btn btn-secondary" onClick="mostrarCalculadora()">Rectángulo</button>
+<button type="button" class="btn btn-secondary" onClick="mostrarCalculadora()">Círculo</button>`;
+article.appendChild(opciones);
+
+//OBJETO TRIANGULO
+
+const triangulo = {
+  base: "",
+  altura: "",
+  diagonal: "",
+  area: "",
+  perimetro: "",
+};
+
+function ingresarDatos() {
+  triangulo.base = prompt("Ingrese la base del triángulo");
+  triangulo.altura = prompt("Ingrese la altura del triángulo");
+  triangulo.diagonal = prompt("Ingrese la diagonal del triángulo");
+  if (triangulo.base > 0 && triangulo.altura > 0 && triangulo.diagonal > 0) {
+    realizarCalculos();
+  } else {
+    mostrarError();
+  }
+}
+
+function realizarCalculos() {
+  triangulo.area = (triangulo.base * triangulo.altura) / 2;
+  triangulo.perimetro = triangulo.base + triangulo.altura + triangulo.diagonal;
+  mostrarResultados();
+}
+
+function mostrarResultados() {
+  article.innerHTML = "";
+  subtitulo.innerHTML = "";
+  let calculador = document.createElement("div");
+  calculador.innerHTML = `<h2>Resultado obtenido:</h2><p class="font-monospace">El area de tu triangulo es de ${triangulo.area} centímetros cuadrados</p><p class="font-monospace">El perímetro de tu triángulo es de ${triangulo.perimetro} centímetros</p>`;
+  article.appendChild(calculador);
+}
+
+function mostrarError() {
+  article.innerHTML = "";
+  subtitulo.innerHTML = "";
+  let error = document.createElement("div");
+  error.innerHTML = `<h2>Resultado obtenido:</h2><p class="font-monospace">No fue posible efectuar el cálculo dado que uno o más datos de los ingresados tiene un valor de incorrecto, es imposible efectuar el cálculo con ese valor de longitud. Por favor, recargá la página y volvé a intentarlo.</p>`;
+  article.appendChild(error);
 }

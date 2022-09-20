@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Barlow";
+  src: url(./fonts/Barlow-Regular.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1191%26quot%3b)' fill='none'%3e%3cpath d='M365.39 932.71 a333.98 333.98 0 1 0 667.96 0 a333.98 333.98 0 1 0 -667.96 0z' fill='rgba(119%2c 138%2c 53%2c 0.54)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M-4.762924755365788 457.12966895285547L243.5160210844738 431.0345002177909 217.4208523494092 182.75555437795128-30.858093490430402 208.85072311301587z' fill='rgba(119%2c 138%2c 53%2c 0.54)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M659.715936330231 961.3127037382187L908.821327463213 943.893557898348 891.4021816233424 694.788166765366 642.2967904903603 712.2073126052367z' fill='rgba(119%2c 138%2c 53%2c 0.54)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M1597.48 733.46 a210.18 210.18 0 1 0 420.36 0 a210.18 210.18 0 1 0 -420.36 0z' fill='rgba(119%2c 138%2c 53%2c 0.54)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M656.4070797456849 425.3313934548063L804.7215457213811 507.5434444065183 886.933596673093 359.2289784308221 738.6191306973969 277.0169274791101z' fill='rgba(119%2c 138%2c 53%2c 0.54)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M1124.51 463.83 a297.51 297.51 0 1 0 595.02 0 a297.51 297.51 0 1 0 -595.02 0z' fill='rgba(119%2c 138%2c 53%2c 0.54)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M110.86582976907744 477.8856303495952L-123.44818996683682 545.0740943274668-56.25972598896516 779.3881140633812 178.0542937469491 712.1996500855095z' fill='rgba(119%2c 138%2c 53%2c 0.54)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M886 82.37 a216.85 216.85 0 1 0 433.7 0 a216.85 216.85 0 1 0 -433.7 0z' fill='rgba(119%2c 138%2c 53%2c 0.54)' class='triangle-float3'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1191'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
+}
+
+section {
+  font-family: "Barlow";
+}
+
+.buttonColor {
+  background-color: #778a35;
+}
+
+.triangulo {
+  width: 0;
+  height: 0;
+  border-right: 50px solid transparent;
+  border-top: 50px solid transparent;
+  border-left: 50px solid #f0ad4e;
+  border-bottom: 50px solid #f0ad4e;
+}

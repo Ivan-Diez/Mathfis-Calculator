@@ -3,6 +3,10 @@ class Usuario {
     this.nombre = nombre;
   }
 }
+
+const almacenarLocal = (key, value) => {
+  localStorage.setItem(key, value);
+};
 const articulo = document.getElementById("figuras");
 
 let boton = document.getElementById("botonIdentificador");
@@ -15,6 +19,7 @@ function cargarUsuario() {
   } else {
     let usuario = new Usuario(nombre);
     iniciarPrograma(usuario);
+    almacenarLocal("usuarioRegistrado", JSON.stringify(nombre));
   }
 }
 
@@ -68,10 +73,11 @@ function crearFigura() {
 }
 
 function finalizarPrograma() {
+  let usuario = JSON.parse(localStorage.getItem(`usuarioRegistrado`));
   articulo.innerHTML = "";
   const finalizar = document.createElement("div");
   finalizar.className = "container";
-  finalizar.innerHTML = `<p class = "fs-3 text-center">Gracias por utilizar nuestra aplicación web, esperamos que vuelva pronto!</p>`;
+  finalizar.innerHTML = `<p class = "fs-3 text-center">Gracias ${usuario} por utilizar nuestra aplicación web, esperamos que vuelva pronto!</p>`;
   articulo.appendChild(finalizar);
 }
 
@@ -123,9 +129,6 @@ function datosCirculo() {
   <div class="mb-3 text-center">
     <button type="button" class="btn btn-success fs-5" onClick="cargarCirculo()">Calcular</button>
   </div>`;
-
-  /*<input class="field" type="text" name="radio" id="radio" placeholder="Ingrese el radio"/>
-  <button type="button" class="btn btn-secondary" onClick="cargarCirculo()">Calcular</button>*/
   articulo.appendChild(datos);
 }
 

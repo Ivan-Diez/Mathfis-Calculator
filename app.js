@@ -1,12 +1,32 @@
+class Usuario {
+  constructor(nombre) {
+    this.nombre = nombre;
+  }
+}
+const articulo = document.getElementById("figuras");
+
+let boton = document.getElementById("botonIdentificador");
+boton.addEventListener("click", cargarUsuario);
+
+function cargarUsuario() {
+  let nombre = document.getElementById("nombre").value;
+  if (nombre == "") {
+    cargarUsuario();
+  } else {
+    let usuario = new Usuario(nombre);
+    iniciarPrograma(usuario);
+  }
+}
+
 // Creación de Figuras dinámicas
 
-let figurasCreadas = [];
-
-const articulo = document.getElementById("figuras");
-const iniciar = document.createElement("div");
-iniciar.className = "text-center";
-iniciar.innerHTML = `<button type="button" class="btn btn-success fs-5" id="triangulo" onClick="crearFigura()">Iniciar</button>`;
-articulo.appendChild(iniciar);
+function iniciarPrograma(usuario) {
+  articulo.innerHTML = "";
+  const iniciar = document.createElement("div");
+  iniciar.className = "container text-center mt-5";
+  iniciar.innerHTML = `<h3>Hola ${usuario.nombre}, pulsá iniciar para ejecutar el programa.</h3><button type="button" class="btn btn-success fs-5 mt-3" onClick="crearFigura()">Iniciar</button>`;
+  articulo.appendChild(iniciar);
+}
 
 function crearFigura() {
   articulo.innerHTML = "";
@@ -14,10 +34,10 @@ function crearFigura() {
   opciones.className = "container text-center";
   opciones.innerHTML = `
   <h2 id="subtitulo">Seleccioná la figura de la cual deseas obtener el area y su perímetro</h2>
-  <div class="container">
-  <div class="row g-5">
-  <div class="col-sm-12 col-md-6 col-lg-3">
-      <div class="card">
+    <div class="container mt-5">
+    <div class="row g-5">
+      <div class="col-sm-12 col-md-6 col-lg-3">
+        <div class="card">
           <img src="./assets/triangulo.png" class="p-3" alt="triangulo" />
           <button type="button" class="btn btn-success fs-5" id="triangulo" onClick="datosTriangulo()">Triángulo</button>
         </div>
@@ -32,7 +52,7 @@ function crearFigura() {
   
       <div class="col-sm-12 col-md-6 col-lg-3">
         <div class="card">
-          <img src="./assets/rectangulo.png" class="p-3" alt="rectangulo" />
+          <img src="./assets/rectangulo.png" class="p-3 mantenerDimensiones" alt="rectangulo" />
           <button type="button" class="btn btn-success fs-5" id="rectangulo" onClick="datosParalelogramos()">Rectángulo</button>
         </div>
       </div>
@@ -47,24 +67,31 @@ function crearFigura() {
   articulo.appendChild(opciones);
 }
 
-function mostrarResultados() {
-  figurasCreadas.forEach((item, index) => {
-    articulo.innerHTML = "";
-    const resultados = document.createElement("div");
-    resultados.innerHTML = `<p>Esta figura es la número${index}</p><p>Su area era de ${item.area} centímetros cuadrados</p><p>Su períemtro era de ${item.perimetro} centímetros</p><button type="button" class="btn btn-secondary" onClick="crearFigura()">Nueva figura</button>`;
-    articulo.appendChild(resultados);
-    console.log(figurasCreadas);
-  });
+function finalizarPrograma() {
+  articulo.innerHTML = "";
+  const finalizar = document.createElement("div");
+  finalizar.className = "container";
+  finalizar.innerHTML = `<p class = "fs-3 text-center">Gracias por utilizar nuestra aplicación web, esperamos que vuelva pronto!</p>`;
+  articulo.appendChild(finalizar);
 }
 
 // Display: Ingresar datos para figura Triangulo
 function datosTriangulo() {
   articulo.innerHTML = "";
   let datos = document.createElement("div");
-  datos.innerHTML = `<input class="field" type="text" name="base" id="base" placeholder="Ingrese la base"/>
-   <input class="field" type="text" name="altura" id="altura" placeholder="Ingrese la altura"/>
-   <input class="field" type="text" name="diagonal" id="diagonal" placeholder="Ingrese la diagonal"/>
-   <button type="button" class="btn btn-secondary" onClick="cargarTriangulo()">Calcular</button>`;
+  datos.innerHTML = `
+    <div class="offset-md-4 col-md-4 mb-4">
+      <input class="field form-control text-center fs-3 mt-5" type="text" name="base" id="base" placeholder="Ingrese la base"/>
+    </div>
+    <div class="offset-md-4 col-md-4 mb-4">
+      <input class="field form-control text-center fs-3 mt-5" type="text" name="altura" id="altura" placeholder="Ingrese la altura"/>
+    </div>
+    <div class="offset-md-4 col-md-4 mb-4">
+      <input class="field form-control text-center fs-3 mt-5" type="text" name="diagonal" id="diagonal" placeholder="Ingrese la diagonal"/>
+    </div>
+    <div class="mb-3 text-center">
+      <button type="button" class="btn btn-success fs-5" onClick="cargarTriangulo()">Calcular</button>
+    </div>`;
   articulo.appendChild(datos);
 }
 
@@ -72,9 +99,16 @@ function datosTriangulo() {
 function datosParalelogramos() {
   articulo.innerHTML = "";
   let datos = document.createElement("div");
-  datos.innerHTML = `<input class="field" type="text" name="base" id="base" placeholder="Ingrese la base"/>
-  <input class="field" type="text" name="altura" id="altura" placeholder="Ingrese la altura"/>
-  <button type="button" class="btn btn-secondary" onClick="cargarParalelogramos()">Calcular</button>`;
+  datos.innerHTML = `
+    <div class="offset-md-4 col-md-4 mb-4">
+      <input class="field form-control text-center fs-3 mt-5" type="text" name="base" id="base" placeholder="Ingrese la base"/>
+    </div>
+    <div class="offset-md-4 col-md-4 mb-4">
+      <input class="field form-control text-center fs-3 mt-5" type="text" name="altura" id="altura" placeholder="Ingrese la altura"/>
+    </div>
+    <div class="mb-3 text-center">
+      <button type="button" class="btn btn-success fs-5" onClick="cargarParalelogramos()">Calcular</button>
+    </div>`;
   articulo.appendChild(datos);
 }
 
@@ -82,8 +116,16 @@ function datosParalelogramos() {
 function datosCirculo() {
   articulo.innerHTML = "";
   let datos = document.createElement("div");
-  datos.innerHTML = `<input class="field" type="text" name="radio" id="radio" placeholder="Ingrese el radio"/>
-  <button type="button" class="btn btn-secondary" onClick="cargarCirculo()">Calcular</button>`;
+  datos.innerHTML = `
+  <div class="offset-md-4 col-md-4 mb-4">
+    <input class="field form-control text-center fs-3 mt-5" type="text" name="radio" id="radio" placeholder="Ingrese el radio"/>
+  </div>
+  <div class="mb-3 text-center">
+    <button type="button" class="btn btn-success fs-5" onClick="cargarCirculo()">Calcular</button>
+  </div>`;
+
+  /*<input class="field" type="text" name="radio" id="radio" placeholder="Ingrese el radio"/>
+  <button type="button" class="btn btn-secondary" onClick="cargarCirculo()">Calcular</button>*/
   articulo.appendChild(datos);
 }
 
@@ -133,37 +175,39 @@ function calcularCirculo(radio) {
 function resultadosTriangulo(area, perimetro) {
   articulo.innerHTML = "";
   let resultados = document.createElement("div");
-  resultados.innerHTML = `<p>El area de la figura es de ${area} centímetros cuadrados</p><p>El perimetro de la figura es de ${perimetro} centímetros</p><button type="button" class="btn btn-secondary" onClick="crearFigura()">Nueva figura</button> <button type="button" class="btn btn-secondary" onClick="mostrarResultados()">Finalizar</button>`;
+  resultados.className = "container text-center mt-5";
+  resultados.innerHTML = `<h3>El area de la figura es de ${area} centímetros cuadrados</h3><h3>El perimetro de la figura es de ${perimetro} centímetros</h3>
+  <div class="d-flex flex-column">
+  <button type="button" class="btn btn-success fs-5 mt-3" onClick="crearFigura()">Pulsá aqui para crear una nueva figura</button>
+  <button type="button" class="btn btn-success fs-5 mt-3" onClick="finalizarPrograma()">Finalizar ejecución del programa</button>
+  </div>`;
   articulo.appendChild(resultados);
-  guardarFigura(area, perimetro);
 }
 // PARALELOGRAMOS
 function resultadosParalelogramos(area, perimetro) {
   articulo.innerHTML = "";
   let resultados = document.createElement("div");
-  resultados.innerHTML = `<p>El area de la figura es de ${area} centímetros cuadrados</p><p>El perimetro de la figura es de ${perimetro} centímetros</p>`;
+  resultados.className = "container text-center mt-5";
+  resultados.innerHTML = `
+  <h3>El area de la figura es de ${area} centímetros cuadrados</h3>
+  <h3>El perimetro de la figura es de ${perimetro} centímetros</h3>
+  <div class="d-flex flex-column">
+    <button type="button" class="btn btn-success fs-5 mt-3" onClick="crearFigura()">Pulsá aqui para crear una nueva figura</button>
+    <button type="button" class="btn btn-success fs-5 mt-3" onClick="finalizarPrograma()">Finalizar ejecución del programa</button>
+  </div>`;
   articulo.appendChild(resultados);
 }
 // CIRCULO
 function resultadosCirculo(area, perimetro) {
   articulo.innerHTML = "";
   let resultados = document.createElement("div");
-  resultados.innerHTML = `<p>El area de la figura es de ${Math.round(
-    area
-  )} centímetros cuadrados</p><p>El perimetro de la figura es de ${Math.round(
-    perimetro
-  )} centímetros</p>`;
+  resultados.className = "container text-center mt-5";
+  resultados.innerHTML = `
+  <h3>El area de la figura es de ${Math.round(area)} centímetros cuadrados</h3>
+  <h3>El perimetro de la figura es de ${Math.round(perimetro)} centímetros</h3>
+  <div class="d-flex flex-column">
+    <button type="button" class="btn btn-success fs-5 mt-3" onClick="crearFigura()">Pulsá aqui para crear una nueva figura</button>
+    <button type="button" class="btn btn-success fs-5 mt-3" onClick="finalizarPrograma()">Finalizar ejecución del programa</button>
+  </div>`;
   articulo.appendChild(resultados);
-}
-
-function guardarFigura(area, perimetro) {
-  let figura = {
-    area: area,
-    perimetro: perimetro,
-  };
-  enviarFigura(figura);
-}
-
-function enviarFigura(figura) {
-  figurasCreadas.push(figura);
 }

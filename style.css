@@ -26,3 +26,11 @@ section {
 .mantenerDimensiones {
   object-fit: contain;
 }
+
+.rojo {
+  background-color: red;
+}
+
+.azul {
+  background-color: red;
+}

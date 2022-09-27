@@ -12,15 +12,38 @@ const articulo = document.getElementById("figuras");
 let boton = document.getElementById("botonIdentificador");
 boton.addEventListener("click", cargarUsuario);
 
+// AÑADO LIBRERIAS
+function usuarioAdmin() {
+  Swal.fire({
+    icon: "question",
+    title: "¡ Hola Creador !",
+    text: "Ingresaste en modo creador, deseas continuar ?",
+  });
+}
+
+function usuarioCorrecto() {
+  Swal.fire({
+    position: "center-center",
+    icon: "success",
+    title: "El nombre ingresado es correcto",
+    showConfirmButton: false,
+    timer: 1250,
+  });
+}
+
+// AÑADO OPERADOR AVANZADO "AND"
+
 function cargarUsuario() {
   let nombre = document.getElementById("nombre").value;
   if (nombre == "") {
     cargarUsuario();
   } else {
+    usuarioCorrecto();
     let usuario = new Usuario(nombre);
     iniciarPrograma(usuario);
     almacenarLocal("usuarioRegistrado", JSON.stringify(nombre));
   }
+  nombre === "Ivan Diez" && usuarioAdmin();
 }
 
 // Creación de Figuras dinámicas

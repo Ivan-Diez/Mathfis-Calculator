@@ -208,6 +208,21 @@ function resultadosTriangulo(area, perimetro) {
   <button type="button" class="btn btn-success fs-5 mt-3" onClick="finalizarPrograma()">Finalizar ejecución del programa</button>
   </div>`;
   articulo.appendChild(resultados);
+
+  fetch(`https://jsonplaceholder.typicode.com/posts`, {
+    method: "POST",
+    body: JSON.stringify({
+      title: "Resultados",
+      body: `Area:${area}cm Perimetro:${perimetro}cm`,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
 // PARALELOGRAMOS
 function resultadosParalelogramos(area, perimetro) {
@@ -222,6 +237,21 @@ function resultadosParalelogramos(area, perimetro) {
     <button type="button" class="btn btn-success fs-5 mt-3" onClick="finalizarPrograma()">Finalizar ejecución del programa</button>
   </div>`;
   articulo.appendChild(resultados);
+
+  fetch(`https://jsonplaceholder.typicode.com/posts`, {
+    method: "POST",
+    body: JSON.stringify({
+      title: "Resultados",
+      body: `Area:${area}cm Perimetro:${perimetro}cm`,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
 // CIRCULO
 function resultadosCirculo(area, perimetro) {
@@ -236,4 +266,19 @@ function resultadosCirculo(area, perimetro) {
     <button type="button" class="btn btn-success fs-5 mt-3" onClick="finalizarPrograma()">Finalizar ejecución del programa</button>
   </div>`;
   articulo.appendChild(resultados);
+
+  fetch(`https://jsonplaceholder.typicode.com/posts`, {
+    method: "POST",
+    body: JSON.stringify({
+      title: "Resultados",
+      body: `Area:${area}cm Perimetro:${perimetro}cm`,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 }

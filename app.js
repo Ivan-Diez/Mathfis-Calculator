@@ -4,6 +4,53 @@ class Usuario {
   }
 }
 
+// Creación de las distintas figuras mediante un método constructor.
+
+class Triangulo {
+  constructor(base, altura, diagonal) {
+    this.base = base;
+    this.altura = altura;
+    this.diagonal = diagonal;
+    this.area = "";
+    this.perimetro = "";
+  }
+
+  efectuarCalculos() {
+    this.area = (this.base * this.altura) / 2;
+    this.perimetro = this.base + this.altura + this.diagonal;
+  }
+}
+
+class Paralelogramo {
+  constructor(base, altura) {
+    this.base = base;
+    this.altura = altura;
+    this.area = "";
+    this.perimetro = "";
+  }
+
+  efectuarCalculos() {
+    this.area = this.base * this.altura;
+    this.perimetro = (this.base + this.altura) * 2;
+  }
+}
+
+class Circulo {
+  constructor(radio) {
+    this.radio = radio;
+    this.area = "";
+    this.perimetro = "";
+  }
+
+  efectuarCalculos() {
+    this.area = this.radio * this.radio * Math.PI;
+    this.perimetro = 2 * this.radio * Math.PI;
+  }
+}
+
+// Array para almacenar las figuras creadas
+const figurasCreadas = [];
+
 const almacenarLocal = (key, value) => {
   localStorage.setItem(key, value);
 };
@@ -12,7 +59,7 @@ const articulo = document.getElementById("figuras");
 let boton = document.getElementById("botonIdentificador");
 boton.addEventListener("click", cargarUsuario);
 
-// AÑADO LIBRERIAS
+// Utilización de librería
 function usuarioAdmin() {
   Swal.fire({
     icon: "question",
@@ -31,11 +78,11 @@ function usuarioCorrecto() {
   });
 }
 
-// AÑADO OPERADOR AVANZADO "AND"
+// Utilización del operador avanzado "AND"
 
 function cargarUsuario() {
   let nombre = document.getElementById("nombre").value;
-  if (nombre == "") {
+  if (nombre == "" || nombre == Number.isNaN()) {
     cargarUsuario();
   } else {
     usuarioCorrecto();
@@ -52,11 +99,11 @@ function iniciarPrograma(usuario) {
   articulo.innerHTML = "";
   const iniciar = document.createElement("div");
   iniciar.className = "container text-center mt-5";
-  iniciar.innerHTML = `<h3>Hola ${usuario.nombre}, pulsá iniciar para ejecutar el programa.</h3><button type="button" class="btn btn-success fs-5 mt-3" onClick="crearFigura()">Iniciar</button>`;
+  iniciar.innerHTML = `<h3>Hola ${usuario.nombre}, pulsá iniciar para ejecutar el programa.</h3><button type="button" class="btn btn-success fs-5 mt-3" onClick="seleccionarFigura()">Iniciar</button>`;
   articulo.appendChild(iniciar);
 }
 
-function crearFigura() {
+function seleccionarFigura() {
   articulo.innerHTML = "";
   const opciones = document.createElement("div");
   opciones.className = "container text-center";
@@ -64,28 +111,21 @@ function crearFigura() {
   <h2 id="subtitulo">Seleccioná la figura de la cual deseas obtener el area y su perímetro</h2>
     <div class="container mt-5">
     <div class="row g-5">
-      <div class="col-sm-12 col-md-6 col-lg-3">
+      <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="card">
           <img src="./assets/triangulo.png" class="p-3" alt="triangulo" />
           <button type="button" class="btn btn-success fs-5" id="triangulo" onClick="datosTriangulo()">Triángulo</button>
         </div>
       </div>
   
-      <div class="col-sm-12 col-md-6 col-lg-3">
+      <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="card">
           <img src="./assets/cuadrado.png" class="p-3" alt="cuadrado" />
-          <button type="button" class="btn btn-success fs-5" id="cuadrado" onClick="datosParalelogramos()">Cuadrado</button>
-        </div>
-      </div>
-  
-      <div class="col-sm-12 col-md-6 col-lg-3">
-        <div class="card">
-          <img src="./assets/rectangulo.png" class="p-3 mantenerDimensiones" alt="rectangulo" />
-          <button type="button" class="btn btn-success fs-5" id="rectangulo" onClick="datosParalelogramos()">Rectángulo</button>
+          <button type="button" class="btn btn-success fs-5" id="cuadrado" onClick="datosParalelogramo()">Cuadrado</button>
         </div>
       </div>
 
-      <div class="col-sm-12 col-md-6 col-lg-3">
+      <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="card">
           <img src="./assets/circulo.png" class="p-3" alt="circulo" />
           <button type="button" class="btn btn-success fs-5" id="circulo" onClick="datosCirculo()">Círculo</button>
@@ -95,16 +135,7 @@ function crearFigura() {
   articulo.appendChild(opciones);
 }
 
-function finalizarPrograma() {
-  let usuario = JSON.parse(localStorage.getItem(`usuarioRegistrado`));
-  articulo.innerHTML = "";
-  const finalizar = document.createElement("div");
-  finalizar.className = "container";
-  finalizar.innerHTML = `<p class = "fs-3 text-center">Gracias ${usuario} por utilizar nuestra aplicación web, esperamos que vuelva pronto!</p>`;
-  articulo.appendChild(finalizar);
-}
-
-// Display: Ingresar datos para figura Triangulo
+// Display: Ingresar datos para las distintas figuras
 function datosTriangulo() {
   articulo.innerHTML = "";
   let datos = document.createElement("div");
@@ -119,13 +150,12 @@ function datosTriangulo() {
       <input class="field form-control text-center fs-3 mt-5" type="text" name="diagonal" id="diagonal" placeholder="Ingrese la diagonal"/>
     </div>
     <div class="mb-3 text-center">
-      <button type="button" class="btn btn-success fs-5" onClick="cargarTriangulo()">Calcular</button>
+      <button type="button" class="btn btn-success fs-5" onClick="crearTriangulo()">Calcular</button>
     </div>`;
   articulo.appendChild(datos);
 }
 
-// Display: Ingresar datos para figura Paralelogramos
-function datosParalelogramos() {
+function datosParalelogramo() {
   articulo.innerHTML = "";
   let datos = document.createElement("div");
   datos.innerHTML = `
@@ -136,12 +166,11 @@ function datosParalelogramos() {
       <input class="field form-control text-center fs-3 mt-5" type="text" name="altura" id="altura" placeholder="Ingrese la altura"/>
     </div>
     <div class="mb-3 text-center">
-      <button type="button" class="btn btn-success fs-5" onClick="cargarParalelogramos()">Calcular</button>
+      <button type="button" class="btn btn-success fs-5" onClick="crearParalelogramo()">Calcular</button>
     </div>`;
   articulo.appendChild(datos);
 }
 
-// Display: Ingresar datos para figura Circulo
 function datosCirculo() {
   articulo.innerHTML = "";
   let datos = document.createElement("div");
@@ -150,61 +179,49 @@ function datosCirculo() {
     <input class="field form-control text-center fs-3 mt-5" type="text" name="radio" id="radio" placeholder="Ingrese el radio"/>
   </div>
   <div class="mb-3 text-center">
-    <button type="button" class="btn btn-success fs-5" onClick="cargarCirculo()">Calcular</button>
+    <button type="button" class="btn btn-success fs-5" onClick="crearCirculo()">Calcular</button>
   </div>`;
   articulo.appendChild(datos);
 }
 
-// Capturar datos
-// TRIANGULO
-function cargarTriangulo() {
+// Obtención de valores mediante un casillero input, creación del objeto correspondiente a la figura y almacenamiento en un array.
+
+function crearTriangulo() {
   let base = Number(document.getElementById("base").value);
   let altura = Number(document.getElementById("altura").value);
   let diagonal = Number(document.getElementById("diagonal").value);
-  calcularTriangulo(base, altura, diagonal);
+  const triangulo = new Triangulo(base, altura, diagonal);
+  triangulo.efectuarCalculos();
+  figurasCreadas.push(triangulo);
+  mostrarResultado(triangulo.area, triangulo.perimetro);
 }
-// PARALELOGRAMOS
-function cargarParalelogramos() {
+
+function crearParalelogramo() {
   let base = Number(document.getElementById("base").value);
   let altura = Number(document.getElementById("altura").value);
-  calcularParalelogramos(base, altura);
+  const paralelogramo = new Paralelogramo(base, altura);
+  paralelogramo.efectuarCalculos();
+  figurasCreadas.push(paralelogramo);
+  mostrarResultado(paralelogramo.area, paralelogramo.perimetro);
 }
 
-// CIRCULO
-function cargarCirculo() {
+function crearCirculo() {
   let radio = Number(document.getElementById("radio").value);
-  calcularCirculo(radio);
+  const circulo = new Circulo(radio);
+  circulo.efectuarCalculos();
+  figurasCreadas.push(circulo);
+  mostrarResultado(circulo.area, circulo.perimetro);
 }
 
-// Calcular area y perímetro
-// TRIANGULO
-function calcularTriangulo(base, altura, diagonal) {
-  let area = (base * altura) / 2;
-  let perimetro = base + altura + diagonal;
-  resultadosTriangulo(area, perimetro);
-}
-// PARALELOGRAMOS
-function calcularParalelogramos(base, altura) {
-  let area = base * altura;
-  let perimetro = (base + altura) * 2;
-  resultadosParalelogramos(area, perimetro);
-}
-// CIRCULO
-function calcularCirculo(radio) {
-  let area = radio * radio * Math.PI;
-  let perimetro = 2 * radio * Math.PI;
-  resultadosCirculo(area, perimetro);
-}
+// Muestra el resultado obtenido del cálculo. Se ofrece la posiblidad de crear una nueva figura, a su vez añadirá la misma a un array y contabilizara la cantidad de figuras creadas o finalizar la ejecución del programa
 
-// Mostrar resultados
-// TRIANGULO
-function resultadosTriangulo(area, perimetro) {
+function mostrarResultado(area, perimetro) {
   articulo.innerHTML = "";
   let resultados = document.createElement("div");
   resultados.className = "container text-center mt-5";
   resultados.innerHTML = `<h3>El area de la figura es de ${area} centímetros cuadrados</h3><h3>El perimetro de la figura es de ${perimetro} centímetros</h3>
   <div class="d-flex flex-column">
-  <button type="button" class="btn btn-success fs-5 mt-3" onClick="crearFigura()">Pulsá aqui para crear una nueva figura</button>
+  <button type="button" class="btn btn-success fs-5 mt-3" onClick="seleccionarFigura()">Pulsá aqui para crear una nueva figura</button>
   <button type="button" class="btn btn-success fs-5 mt-3" onClick="finalizarPrograma()">Finalizar ejecución del programa</button>
   </div>`;
   articulo.appendChild(resultados);
@@ -224,61 +241,15 @@ function resultadosTriangulo(area, perimetro) {
       console.log(data);
     });
 }
-// PARALELOGRAMOS
-function resultadosParalelogramos(area, perimetro) {
-  articulo.innerHTML = "";
-  let resultados = document.createElement("div");
-  resultados.className = "container text-center mt-5";
-  resultados.innerHTML = `
-  <h3>El area de la figura es de ${area} centímetros cuadrados</h3>
-  <h3>El perimetro de la figura es de ${perimetro} centímetros</h3>
-  <div class="d-flex flex-column">
-    <button type="button" class="btn btn-success fs-5 mt-3" onClick="crearFigura()">Pulsá aqui para crear una nueva figura</button>
-    <button type="button" class="btn btn-success fs-5 mt-3" onClick="finalizarPrograma()">Finalizar ejecución del programa</button>
-  </div>`;
-  articulo.appendChild(resultados);
 
-  fetch(`https://jsonplaceholder.typicode.com/posts`, {
-    method: "POST",
-    body: JSON.stringify({
-      title: "Resultados",
-      body: `Area:${area}cm Perimetro:${perimetro}cm`,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
-}
-// CIRCULO
-function resultadosCirculo(area, perimetro) {
-  articulo.innerHTML = "";
-  let resultados = document.createElement("div");
-  resultados.className = "container text-center mt-5";
-  resultados.innerHTML = `
-  <h3>El area de la figura es de ${Math.round(area)} centímetros cuadrados</h3>
-  <h3>El perimetro de la figura es de ${Math.round(perimetro)} centímetros</h3>
-  <div class="d-flex flex-column">
-    <button type="button" class="btn btn-success fs-5 mt-3" onClick="crearFigura()">Pulsá aqui para crear una nueva figura</button>
-    <button type="button" class="btn btn-success fs-5 mt-3" onClick="finalizarPrograma()">Finalizar ejecución del programa</button>
-  </div>`;
-  articulo.appendChild(resultados);
+// Finaliza la ejecución de la aplicación web y efectúa un mensaje de despedida y agradecimiento con el nombre identificado
 
-  fetch(`https://jsonplaceholder.typicode.com/posts`, {
-    method: "POST",
-    body: JSON.stringify({
-      title: "Resultados",
-      body: `Area:${area}cm Perimetro:${perimetro}cm`,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+function finalizarPrograma() {
+  console.log(figurasCreadas);
+  let usuario = JSON.parse(localStorage.getItem(`usuarioRegistrado`));
+  articulo.innerHTML = "";
+  const finalizar = document.createElement("div");
+  finalizar.className = "container";
+  finalizar.innerHTML = `<p class = "fs-3 text-center">Gracias ${usuario} por utilizar nuestra aplicación web, has analizado un total de ${figurasCreadas.length} figuras. Esperamos que vuelva pronto!</p>`;
+  articulo.appendChild(finalizar);
 }

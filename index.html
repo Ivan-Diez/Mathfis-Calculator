@@ -31,6 +31,7 @@
             id="nombre"
             class="field form-control text-center fs-3 mt-5"
             placeholder="Ingresá tu nombre"
+            onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
           />
           <button
             type="button"

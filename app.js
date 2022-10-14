@@ -8,6 +8,7 @@ class Usuario {
 
 class Triangulo {
   constructor(base, altura, diagonal) {
+    this.figura = "Triangulo";
     this.base = base;
     this.altura = altura;
     this.diagonal = diagonal;
@@ -23,6 +24,7 @@ class Triangulo {
 
 class Paralelogramo {
   constructor(base, altura) {
+    this.figura = "Paralelogramo";
     this.base = base;
     this.altura = altura;
     this.area = "";
@@ -37,6 +39,7 @@ class Paralelogramo {
 
 class Circulo {
   constructor(radio) {
+    this.figura = "Circulo";
     this.radio = radio;
     this.area = "";
     this.perimetro = "";
@@ -192,8 +195,8 @@ function crearTriangulo() {
   let diagonal = Number(document.getElementById("diagonal").value);
   const triangulo = new Triangulo(base, altura, diagonal);
   triangulo.efectuarCalculos();
-  figurasCreadas.push(triangulo);
-  mostrarResultado(triangulo.area, triangulo.perimetro);
+  figurasCreadas.push(JSON.stringify(triangulo));
+  mostrarResultado(triangulo.area.toFixed(2), triangulo.perimetro.toFixed(2));
 }
 
 function crearParalelogramo() {
@@ -201,20 +204,23 @@ function crearParalelogramo() {
   let altura = Number(document.getElementById("altura").value);
   const paralelogramo = new Paralelogramo(base, altura);
   paralelogramo.efectuarCalculos();
-  figurasCreadas.push(paralelogramo);
-  mostrarResultado(paralelogramo.area, paralelogramo.perimetro);
+  figurasCreadas.push(JSON.stringify(paralelogramo));
+  mostrarResultado(
+    paralelogramo.area.toFixed(2),
+    paralelogramo.perimetro.toFixed(2)
+  );
 }
 
 function crearCirculo() {
   let radio = Number(document.getElementById("radio").value);
   const circulo = new Circulo(radio);
   circulo.efectuarCalculos();
-  figurasCreadas.push(circulo);
-  mostrarResultado(circulo.area, circulo.perimetro);
+  figurasCreadas.push(JSON.stringify(circulo));
+  mostrarResultado(circulo.area.toFixed(2), circulo.perimetro.toFixed(2));
 }
 
 // Muestra el resultado obtenido del cálculo. Se ofrece la posiblidad de crear una nueva figura, a su vez añadirá la misma a un array y contabilizara la cantidad de figuras creadas o finalizar la ejecución del programa
-
+// Envio los datos de figuras creadas a la api JSON placeholder simulando una carga de los mismos, se muestran a su vez en la consola el último elemento agregado al Array que almacena las mismas.
 function mostrarResultado(area, perimetro) {
   articulo.innerHTML = "";
   let resultados = document.createElement("div");
@@ -229,8 +235,8 @@ function mostrarResultado(area, perimetro) {
   fetch(`https://jsonplaceholder.typicode.com/posts`, {
     method: "POST",
     body: JSON.stringify({
-      title: "Resultados",
-      body: `Area:${area}cm Perimetro:${perimetro}cm`,
+      title: "Figura creada",
+      body: `${figurasCreadas.at(-1)}`,
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -245,7 +251,6 @@ function mostrarResultado(area, perimetro) {
 // Finaliza la ejecución de la aplicación web y efectúa un mensaje de despedida y agradecimiento con el nombre identificado
 
 function finalizarPrograma() {
-  console.log(figurasCreadas);
   let usuario = JSON.parse(localStorage.getItem(`usuarioRegistrado`));
   articulo.innerHTML = "";
   const finalizar = document.createElement("div");
